@@ -1,0 +1,13 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+<CascadingValue Name="Cascade1" Value="@cascadeValue">
+    <Crosswalk DontWalkMessage="No se puede andar aqui" />
+</CascadingValue>
+@code {
+    string cascadeValue = "home page";
+}

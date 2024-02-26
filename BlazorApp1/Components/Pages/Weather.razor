@@ -1,0 +1,41 @@
+﻿@page "/weather"
+@inject AppService appSvc
+<PageTitle>Chat Messages</PageTitle>
+
+<h1>Message Log</h1>
+
+@if (messages == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ul>
+            @foreach (var msg in messages)
+            {
+                <li>
+                    @msg.Body
+                </li>
+            }
+    </ul>
+}
+
+@code {
+    List<Message> messages = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        appSvc.MessagePosted += (sender, message) =>
+        {
+            messages.Add(message);
+            InvokeAsync(StateHasChanged);
+        };
+    }
+
+    public class Message
+    {
+        public string Sender{ get; set; }
+        public DateTime Sent{ get; set; }
+        public string Body{ get; set; }
+    }
+}

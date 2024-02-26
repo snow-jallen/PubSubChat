@@ -1,0 +1,19 @@
+﻿@page "/counter"
+@inject AppService appSvc
+
+<PageTitle>Not a counter, but a chat page</PageTitle>
+
+<h1>Counter-Chat</h1>
+
+<input class="form-control" @bind-value=message/>
+<button class="btn btn-primary" @onclick=postMessage>Post Message</button>
+
+@code {
+    private string message;
+
+    private void postMessage()
+    {
+        appSvc.PostMessage(message);
+        message = null;
+    }
+}

@@ -1,0 +1,28 @@
+﻿@inject AppService appService
+
+@if (shouldWalk)
+{
+    <h3>@(WalkMessage.ToLower() + "CUSTOM")</h3>
+}
+else
+{
+    <h3>@DontWalkMessage</h3>
+}
+<div>
+    <button @onclick=OnButtonClick>Click to walk</button>
+</div>
+
+@code {
+    [CascadingParameter(Name = "Cascade1")]
+    public string WalkMessage { get; set; } = "Walk";
+
+    [Parameter]
+    public string DontWalkMessage { get; set; } = "Don't Walk";
+
+    [Parameter]
+    public Action OnButtonClick{ get; set; }
+
+    private bool shouldWalk = true;
+
+    private void toggle() => shouldWalk = !shouldWalk;
+}
